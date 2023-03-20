@@ -216,6 +216,8 @@ function getCocktail() {
       document.querySelector('img').src = data.drinks[0].strDrinkThumb
       document.querySelector('h3').innerHTML = data.drinks[0].strInstructions;
 
+	  // To display ingredients put them into an array if they contain the name 'strIngredient'. Use that array to create a list of <li>s to display above instructions
+
       // function nextDrink() {
       //   for(let i = 0; i < data.drinks.length; i++) {
       //   document.querySelector('h2').innerHTML = data.drinks[i].strDrink;
@@ -260,3 +262,19 @@ function getCocktail() {
 //Search by ingredient
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
+
+window.onload = function(){
+	var popup = document.getElementById('popup');
+    var overlay = document.getElementById('backgroundOverlay');
+    var openButton = document.getElementById('openOverlay');
+    document.onclick = function(e){
+        if(e.target.id == 'backgroundOverlay'){
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+        if(e.target === openButton){
+         	popup.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+    };
+};
