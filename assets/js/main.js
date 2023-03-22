@@ -192,18 +192,17 @@
 // NEW STUFF
 
 //The user will enter a cocktail. Get a cocktail name, photo, and instructions and place them in the DOM
-document.querySelector('button').addEventListener('click', getCocktail)
+document.querySelector('.search-cocktail').addEventListener('click', getCocktail)
 
 // document.querySelector('.next').addEventListener('click', nextCocktail)
 
-let drinkArray = []
+let drinkArray = [];
 let counter = 0;
 
 function getCocktail() {
-    let drink = document.querySelector('input').value;
+    let drink = document.querySelector('.drink-input').value;
     console.log(drink)
 
-    
 
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`)
     .then(res => res.json()) // parse response as JSON
@@ -214,6 +213,7 @@ function getCocktail() {
 
       document.querySelector('h2').innerHTML = data.drinks[0].strDrink;
       document.querySelector('img').src = data.drinks[0].strDrinkThumb
+	  document.querySelector('img').style.width = '20rem'
       document.querySelector('h3').innerHTML = data.drinks[0].strInstructions;
 
 	  // To display ingredients put them into an array if they contain the name 'strIngredient'. Use that array to create a list of <li>s to display above instructions
@@ -268,7 +268,7 @@ window.onload = function(){
     var overlay = document.getElementById('backgroundOverlay');
     var openButton = document.getElementById('openOverlay');
     document.onclick = function(e){
-        if(e.target.id == 'backgroundOverlay'){
+        if(e.target.id !== 'popup'){
             popup.style.display = 'none';
             overlay.style.display = 'none';
         }

@@ -3948,14 +3948,19 @@ input, select, textarea {
     display:block;
 }
 #popup{
-    background-color:#fff;
-    border:1px solid #000;
-    width:80%;
-    height:80vh;
-    position:relative;
-    z-index:500;
+	color: black;
+	font-weight: 900;
+    width: 80%;
+    height: 80vh;
+    background: rgba(255, 255, 255, 0.26);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+	z-index: 100;
 }
-
 /* new */
 
 .container-popup {
@@ -3969,13 +3974,19 @@ input, select, textarea {
 }
 
 .popup {
-    width: 50%;
-    height: 50%;
+    width: 80%;
+    height: 80vh;
     background: #1abcb9;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     margin: auto;
 }
+
+/* When pop-up appears darken rest of site */
+
+/* body {
+	-webkit-mask-image: linear-gradient(black, transparent);
+} */
