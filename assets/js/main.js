@@ -200,6 +200,8 @@ let drinkArray = [];
 let counter = 0;
 
 function getCocktail() {
+	drinkArray = [];
+
     let drink = document.querySelector('.drink-input').value;
     console.log(drink)
 
@@ -207,9 +209,14 @@ function getCocktail() {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`)
     .then(res => res.json()) // parse response as JSON
     .then(data => {
-      console.log(data.drinks);
-      
-      drinkArray = data.drinks
+
+		for(let key in data.drinks) {
+			if(data.drinks[key].strDrink.toLowerCase().startsWith(`${drink.toLowerCase()}`)) {
+			drinkArray.push(data.drinks[key].strDrink)
+			}
+		}
+
+		console.log(drinkArray)
 
       document.querySelector('h2').innerHTML = data.drinks[0].strDrink;
       document.querySelector('img').src = data.drinks[0].strDrinkThumb
@@ -254,10 +261,6 @@ function getCocktail() {
 
 // Form submit on enter https://stackoverflow.com/questions/7218143/submit-search-on-enter-key
 
-// Random cocktail www.thecocktaildb.com/api/json/v1/1/random.php
-
-// Search cocktail by name
-// www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
 
 //Search by ingredient
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
@@ -278,3 +281,29 @@ window.onload = function(){
         }
     };
 };
+
+
+// Fetch Random Drink
+
+document.querySelector('.random-cocktail').addEventListener('click', getRandom)
+
+function getRandom() {
+
+
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+    .then(res => res.json()) // parse response as JSON
+    .then(data => {
+      console.log(data.drinks);
+      
+      drinkArray = data.drinks
+
+      document.querySelector('.random-name').innerHTML = data.drinks[0].strDrink;
+      document.querySelector('.random-image').src = data.drinks[0].strDrinkThumb
+	  document.querySelector('.random-image').style.width = '20rem'
+      document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
+
+    })
+    .catch(err => {
+        console.log(`error ${err}`)
+    });
+}

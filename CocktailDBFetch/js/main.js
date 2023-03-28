@@ -1,10 +1,11 @@
 //The user will enter a cocktail. Get a cocktail name, photo, and instructions and place them in the DOM
 document.querySelector('button').addEventListener('click', getCocktail)
 
-document.querySelector('.next').addEventListener('click', nextCocktail)
+// document.querySelector('.next').addEventListener('click', nextCocktail)
 
 let drinkArray = []
 let counter = 0;
+
 
 function getCocktail() {
     let drink = document.querySelector('input').value;
@@ -18,6 +19,17 @@ function getCocktail() {
       console.log(data.drinks);
       
       drinkArray = data.drinks
+
+      let ginDrinks = []
+
+
+      for(let key in data.drinks) {
+        if(data.drinks[key].strDrink.toLowerCase().includes(`${drink.toLowerCase()}`)) {
+          ginDrinks.push(data.drinks[key].strDrink)
+        }
+      }
+
+      console.log(ginDrinks.sort())
 
       document.querySelector('h2').innerHTML = data.drinks[0].strDrink;
       document.querySelector('img').src = data.drinks[0].strDrinkThumb
@@ -41,16 +53,16 @@ function getCocktail() {
 
 
 
-function nextCocktail() {
-    counter++;
-    if(counter >= drinkArray.length) {
-      counter = 0;
-    }
+// function nextCocktail() {
+//     counter++;
+//     if(counter >= drinkArray.length) {
+//       counter = 0;
+//     }
 
-    document.querySelector('h2').innerHTML = drinkArray[counter].strDrink;
-    document.querySelector('img').src = drinkArray[counter].strDrinkThumb
-    document.querySelector('h3').innerHTML = drinkArray[counter].strInstructions;
-}
+//     document.querySelector('h2').innerHTML = drinkArray[counter].strDrink;
+//     document.querySelector('img').src = drinkArray[counter].strDrinkThumb
+//     document.querySelector('h3').innerHTML = drinkArray[counter].strInstructions;
+// }
 
 
 // If the array contains the ingredient 'rum', 'whiskey, 'bourbon', vodka, tequila
@@ -60,9 +72,6 @@ function nextCocktail() {
 // Form submit on enter https://stackoverflow.com/questions/7218143/submit-search-on-enter-key
 
 // Random cocktail www.thecocktaildb.com/api/json/v1/1/random.php
-
-// Search cocktail by name
-// www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
 
 //Search by ingredient
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
