@@ -3229,17 +3229,11 @@ input, select, textarea {
 
 			@media screen and (max-width: 736px) {
 
-				.wrapper > .inner {
-					padding: 3em 2em 1em 2em ;
-				}
 
 			}
 
 		.wrapper.alt {
 			background-color: #261c3e;
-		}
-
-		.wrapper.style1 {
 		}
 
 		.wrapper.style1-alt {
@@ -3990,3 +3984,4 @@ input, select, textarea {
 /* body {
 	-webkit-mask-image: linear-gradient(black, transparent);
 } */
+

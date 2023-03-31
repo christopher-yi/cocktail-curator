@@ -286,16 +286,38 @@ window.onload = function(){
 // Fetch Random Drink
 
 document.querySelector('.random-cocktail').addEventListener('click', getRandom)
+document.querySelector('.random-cocktail').addEventListener('click', createList)
 
+let ingredientsArr = [];
+let measurementsArr = [];
 function getRandom() {
-
-
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
     .then(res => res.json()) // parse response as JSON
     .then(data => {
       console.log(data.drinks);
       
       drinkArray = data.drinks
+
+	  for(let key in data.drinks[0]) {
+		if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
+			ingredientsArr.push(data.drinks[0][key])
+		}
+	  }
+
+	  for(let key in data.drinks[0]) {
+		if(key.includes('strMeasure') && data.drinks[0][key] !== null) {
+			measurementsArr.push(data.drinks[0][key])
+		}
+	  }
+
+	  for(let i = 0; i < measurementsArr.length; i++) {
+		for(let j = 0; j < ingredientsArr.length; j++) {
+			if(i == j) {
+				ingredientsArr[j] += ': ' + measurementsArr[i]
+			}
+		}
+	  }
+
 
       document.querySelector('.random-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.random-image').src = data.drinks[0].strDrinkThumb
@@ -307,3 +329,14 @@ function getRandom() {
         console.log(`error ${err}`)
     });
 }
+
+
+function createList(ingredientsArr) {
+
+	  for(let i = 0; i < ingredientsArr.length; i++) {
+		let item = ingredientItem.appendChild(document.createTextNode(ingredientArr[i]))
+		document.querySelector('.ingredient-list').appendChild(item)
+	  }
+}
+
+document.body('ingredient-list').appendChild(createList(ingredientsArr))
