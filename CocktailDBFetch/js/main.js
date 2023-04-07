@@ -6,6 +6,8 @@ document.querySelector('button').addEventListener('click', getCocktail)
 let drinkArray = []
 let counter = 0;
 
+let ingredientsArr = [];
+let measurementsArr = [];
 
 function getCocktail() {
     let drink = document.querySelector('input').value;
@@ -20,17 +22,37 @@ function getCocktail() {
       
       drinkArray = data.drinks
 
-      let ginDrinks = []
 
 
-      for(let key in data.drinks) {
-        if(data.drinks[key].strDrink.toLowerCase().includes(`${drink.toLowerCase()}`)) {
-          ginDrinks.push(data.drinks[key].strDrink)
-        }
-      }
 
-      console.log(ginDrinks.sort())
+for(let key in data.drinks[0]) {
+		if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
+			ingredientsArr.push(data.drinks[0][key])
+		}
+	  }
 
+	  for(let key in data.drinks[0]) {
+		if(key.includes('strMeasure') && data.drinks[0][key] !== null) {
+			measurementsArr.push(data.drinks[0][key])
+		}
+	  }
+
+	  for(let i = 0; i < measurementsArr.length; i++) {
+		for(let j = 0; j < ingredientsArr.length; j++) {
+			if(i == j) {
+				ingredientsArr[j] += ': ' + measurementsArr[i]
+			}
+		}
+	  }
+
+	  console.log(ingredientsArr)
+
+    ingredientsArr.forEach(step => {
+      const instruct = `<li>${step}<li>`;
+      document.querySelector('ul').insertAdjacentHTML('beforeend', instruct);
+    })
+
+      document.querySelector('ul').style.listStyle = 'none'
       document.querySelector('h2').innerHTML = data.drinks[0].strDrink;
       document.querySelector('img').src = data.drinks[0].strDrinkThumb
       document.querySelector('h3').innerHTML = data.drinks[0].strInstructions;
@@ -76,3 +98,59 @@ function getCocktail() {
 //Search by ingredient
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
+
+/**
+ * Generate HTML List From JavaScript Array
+ *
+ * @source https://getbutterfly.com/generate-html-list-from-javascript-array/
+ */
+// function makeList() {
+//   // Establish the array which acts as a data source for the list
+//   let listData = [
+//       'Blue',
+//       'Red',
+//       'White',
+//       'Green',
+//       'Black',
+//       'Orange'
+//   ];
+
+//   // Make a container element for the list
+//   let listContainer = document.createElement('div');
+
+//   // Make the list
+//   let listElement = document.createElement('ul');
+
+//   // Make the list item
+//   let listItem = document.createElement('li');
+
+//   // Add it to the page
+//   document.body.appendChild(listContainer);
+//   listContainer.appendChild(listElement);
+
+//   // Set up a loop that goes through the items in listItems one at a time
+//   let numberOfListItems = listData.length;
+
+//   for (let i = 0; i < numberOfListItems; ++i) {
+//       // Add the item text
+
+// // Use this if the array elements contain HTML
+//       // listItem.innerHTML = listData[i];
+//       // If not, use the line below
+
+// // Use this if the array elements are text only
+//       listItem.textContent = listData[i];
+
+//       // Add listItem to the listElement
+//       listElement.appendChild(listItem);
+
+//       // Reset the list item
+//       listItem = document.createElement('li');
+//   }
+// }
+
+// // Usage
+// makeList();
+
+// // From
+// // https://getbutterfly.com/generate-html-list-from-javascript-array/#solution-1

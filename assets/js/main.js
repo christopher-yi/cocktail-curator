@@ -286,7 +286,6 @@ window.onload = function(){
 // Fetch Random Drink
 
 document.querySelector('.random-cocktail').addEventListener('click', getRandom)
-document.querySelector('.random-cocktail').addEventListener('click', createList)
 
 let ingredientsArr = [];
 let measurementsArr = [];
@@ -296,6 +295,12 @@ function getRandom() {
     .then(data => {
       console.log(data.drinks);
       
+	  document.querySelector('.lucky').style.display = 'none'
+	  document.querySelector('.lucky2').style.display = 'none'
+	  
+	  document.querySelector(".list-container").innerHTML = '';
+	
+
       drinkArray = data.drinks
 
 	  for(let key in data.drinks[0]) {
@@ -317,26 +322,30 @@ function getRandom() {
 			}
 		}
 	  }
+	  
+	  console.log(ingredientsArr)
 
+	  
 
+	  ingredientsArr.forEach(step => {
+		const instruct = `<li>${step}<li>`;
+		document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
+	  })
+
+	  document.querySelector('.list-container').style.display = 'inline-block'
+	  document.querySelector('.list-container').style.listStyle = 'none'
       document.querySelector('.random-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.random-image').src = data.drinks[0].strDrinkThumb
 	  document.querySelector('.random-image').style.width = '20rem'
       document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
 
+	  ingredientsArr = [];
     })
     .catch(err => {
         console.log(`error ${err}`)
     });
+	return ingredientsArr;
+
 }
 
-
-function createList(ingredientsArr) {
-
-	  for(let i = 0; i < ingredientsArr.length; i++) {
-		let item = ingredientItem.appendChild(document.createTextNode(ingredientArr[i]))
-		document.querySelector('.ingredient-list').appendChild(item)
-	  }
-}
-
-document.body('ingredient-list').appendChild(createList(ingredientsArr))
+// https://stackoverflow.com/questions/55090335/how-to-create-lis-based-on-fetch-result
