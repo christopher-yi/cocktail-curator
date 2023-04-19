@@ -259,6 +259,8 @@ function getCocktail() {
 
 // Autocomplete feature https://www.w3schools.com/howto/howto_js_autocomplete.asp
 
+// ->>> While the search bar contains the characters the user puts in, create an alphabetically sorted array of the drinks that start with those characters and then create a list and make them appear on drop down list
+
 // Form submit on enter https://stackoverflow.com/questions/7218143/submit-search-on-enter-key
 
 

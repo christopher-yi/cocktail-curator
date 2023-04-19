@@ -73,6 +73,10 @@ input, select, textarea {
 
 /* Basic */
 
+body {
+	background: black;
+}
+
 	@-ms-viewport {
 		width: device-width;
 	}
@@ -97,9 +101,6 @@ input, select, textarea {
 		box-sizing: inherit;
 	}
 
-	body {
-		background-color: black;
-	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 			-moz-animation: none !important;
@@ -3248,8 +3249,20 @@ input, select, textarea {
 			background-color: #3e4094;
 		}
 
-		.wrapper.style3 {
-			background-color: #b74e91;
+
+		.wrapper.style3::before {
+			content: "";
+			background-image: url(images/cocktail-background.jpg);
+			background-attachment: fixed;
+			background-position: top right;
+			background-repeat: no-repeat;
+			background-size: contain;
+			position: absolute;
+			top: 0px;
+        	right: 0px;
+        	bottom: 0px;
+      		left: 0px;
+			opacity: 75%;
 		}
 
 		.wrapper.style3-alt {
@@ -3865,8 +3878,6 @@ input, select, textarea {
 
 /* Intro */
 
-	#intro {
-	}
 	
 	.wrapper.style1::before {
 		content: "";
@@ -3923,10 +3934,18 @@ input, select, textarea {
 	.wrapper.style1::before {
 		background-size: cover;
 	}
+
+	.wrapper.style3::before {
+		background-size: cover;
+	}
 }
 
 @media screen and (max-width: 736px) {
 	.wrapper.style1::before {
+		background-size: contain;
+	}
+
+	.wrapper.style3::before {
 		background-size: contain;
 	}
 }
