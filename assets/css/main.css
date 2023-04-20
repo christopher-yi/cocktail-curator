@@ -3238,7 +3238,23 @@ body {
 		}
 
 		.wrapper.style1-alt {
-			background-color: #493382;
+			background-color: black;
+		}
+
+
+		.wrapper.style1-alt::before {
+			content: "";
+			background-image: url(images/cocktail-background.jpg);
+			background-attachment: fixed;
+			background-position: top right;
+			background-repeat: no-repeat;
+			background-size: contain;
+			position: absolute;
+			top: 0px;
+        	right: 0px;
+        	bottom: 0px;
+      		left: 0px;
+			opacity: 75%;
 		}
 
 		.wrapper.style2 {
@@ -3931,21 +3947,13 @@ body {
 		}
 
 @media screen and (max-width: 1280px) {
-	.wrapper.style1::before {
-		background-size: cover;
-	}
-
-	.wrapper.style3::before {
+	.wrapper.style1::before, .wrapper.style1-alt::before, .wrapper.style3::before {
 		background-size: cover;
 	}
 }
 
 @media screen and (max-width: 736px) {
-	.wrapper.style1::before {
-		background-size: contain;
-	}
-
-	.wrapper.style3::before {
+	.wrapper.style1::before, .wrapper.style1-alt::before, .wrapper.style3::before  {
 		background-size: contain;
 	}
 }

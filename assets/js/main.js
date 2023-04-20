@@ -189,22 +189,62 @@
 
 })(jQuery);
 
+
 // NEW STUFF
-
-//The user will enter a cocktail. Get a cocktail name, photo, and instructions and place them in the DOM
 document.querySelector('.search-cocktail').addEventListener('click', getCocktail)
+document.querySelector('.drink-input').addEventListener('input', listCocktails)
 
-// document.querySelector('.next').addEventListener('click', nextCocktail)
+// Search on enter
+document.querySelector('.drink-input').addEventListener('keypress', handle)
+function handle(e){
+	if(e.key === "Enter"){
+		getCocktail();
+	}
+	return false;
+}
 
+// Array to return the correct drink object
 let drinkArray = [];
-let counter = 0;
+
+// Array for search input drinks to be listed in
+let drinkName = [];
+
+// Get cocktail -> don't get cocktail if it doesn't match the strDrink name. Use autofill to make sure the drink isn't spelled incorrectly. if it doesn't match show 'no results named `${drink}`
 
 function getCocktail() {
-	drinkArray = [];
-
     let drink = document.querySelector('.drink-input').value;
     console.log(drink)
 
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`)
+    .then(res => res.json()) // parse response as JSON
+    .then(data => {
+	
+
+	//*******/ If input is not an exact match it will not return the drink, if the input does not match strDrink, defer to select autocomplete focus drink instead********
+
+	for(let key in data.drinks) {
+		if(data.drinks[key].strDrink.toLowerCase() === `${drink.toLowerCase()}`) {
+			console.log(data.drinks[key])
+			return data.drinks[key]
+		}
+	}
+
+	console.log(drinkArray)
+
+      document.querySelector('h2').innerHTML = data.drinks[0].strDrink;
+      document.querySelector('img').src = data.drinks[0].strDrinkThumb
+	  document.querySelector('img').style.width = '20rem'
+      document.querySelector('h3').innerHTML = data.drinks[0].strInstructions;
+    })
+    .catch(err => {
+        console.log(`error ${err}`)
+    });
+}
+
+// List cocktails
+function listCocktails() {
+    let drink = document.querySelector('.drink-input').value;
+    console.log(drink)
 
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`)
     .then(res => res.json()) // parse response as JSON
@@ -212,28 +252,20 @@ function getCocktail() {
 
 		for(let key in data.drinks) {
 			if(data.drinks[key].strDrink.toLowerCase().startsWith(`${drink.toLowerCase()}`)) {
-			drinkArray.push(data.drinks[key].strDrink)
+			drinkName.push(data.drinks[key].strDrink)
 			}
 		}
 
-		console.log(drinkArray)
+		drinkName = drinkName.filter(x => x.toLowerCase().startsWith(`${drink}`));
 
-      document.querySelector('h2').innerHTML = data.drinks[0].strDrink;
-      document.querySelector('img').src = data.drinks[0].strDrinkThumb
-	  document.querySelector('img').style.width = '20rem'
-      document.querySelector('h3').innerHTML = data.drinks[0].strInstructions;
+		if(drink == '') {
+			drinkName = [];
+		}
 
-	  // To display ingredients put them into an array if they contain the name 'strIngredient'. Use that array to create a list of <li>s to display above instructions
+		console.log([...new Set(drinkName)])
 
-      // function nextDrink() {
-      //   for(let i = 0; i < data.drinks.length; i++) {
-      //   document.querySelector('h2').innerHTML = data.drinks[i].strDrink;
-      //   document.querySelector('img').src = data.drinks[i].strDrinkThumb
-      //   document.querySelector('h3').innerHTML = data.drinks[i].strInstructions;
-      //  }
-      // }
 
-      // nextDrink()
+		// Add autocomplete here -.-
 
     })
     .catch(err => {
@@ -242,32 +274,12 @@ function getCocktail() {
 }
 
 
-
-// function nextCocktail() {
-//     counter++;
-//     if(counter >= drinkArray.length) {
-//       counter = 0;
-//     }
-
-//     document.querySelector('h2').innerHTML = drinkArray[counter].strDrink;
-//     document.querySelector('img').src = drinkArray[counter].strDrinkThumb
-//     document.querySelector('h3').innerHTML = drinkArray[counter].strInstructions;
-// }
-
-
-// If the array contains the ingredient 'rum', 'whiskey, 'bourbon', vodka, tequila
-
-// Autocomplete feature https://www.w3schools.com/howto/howto_js_autocomplete.asp
-
-// ->>> While the search bar contains the characters the user puts in, create an alphabetically sorted array of the drinks that start with those characters and then create a list and make them appear on drop down list
-
-// Form submit on enter https://stackoverflow.com/questions/7218143/submit-search-on-enter-key
-
-
-//Search by ingredient
+//Search by ingredient -> if 
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
 // www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
 
+
+// Popup drink window
 window.onload = function(){
 	var popup = document.getElementById('popup');
     var overlay = document.getElementById('backgroundOverlay');
@@ -286,11 +298,11 @@ window.onload = function(){
 
 
 // Fetch Random Drink
-
 document.querySelector('.random-cocktail').addEventListener('click', getRandom)
 
 let ingredientsArr = [];
 let measurementsArr = [];
+
 function getRandom() {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
     .then(res => res.json()) // parse response as JSON
@@ -327,8 +339,6 @@ function getRandom() {
 	  
 	  console.log(ingredientsArr)
 
-	  
-
 	  ingredientsArr.forEach(step => {
 		const instruct = `<li>${step}<li>`;
 		document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
@@ -347,7 +357,22 @@ function getRandom() {
         console.log(`error ${err}`)
     });
 	return ingredientsArr;
-
 }
 
-// https://stackoverflow.com/questions/55090335/how-to-create-lis-based-on-fetch-result
+
+// Autocomplete
+
+// If the array contains the ingredient 'rum', 'whiskey, 'bourbon', vodka, tequila
+
+// Autocomplete feature https://www.w3schools.com/howto/howto_js_autocomplete.asp
+
+// ->>> While the search bar contains the characters the user puts in, create an alphabetically sorted array of the drinks that start with those characters and then create a list and make them appear on drop down list
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Separate the listCocktail and getCocktail functions
+
+// listCocktails will fire when the 'input' event listener on the text input fires
+// it will also create an autocomplete list on each input change
+// need to also implement focus, and keyup, keydown on list
+
+// getCocktail will fire only when enter is pressed on text input or when submit button is pressed, get cocktail will change the popup container and add drink data onto it.
