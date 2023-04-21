@@ -192,6 +192,7 @@
 
 // NEW STUFF
 document.querySelector('.search-cocktail').addEventListener('click', getCocktail)
+
 document.querySelector('.drink-input').addEventListener('input', listCocktails)
 
 // Search on enter
@@ -219,27 +220,35 @@ function getCocktail() {
     .then(res => res.json()) // parse response as JSON
     .then(data => {
 	
+	if(drink == '') {
+		return [];
+	}
 
 	//*******/ If input is not an exact match it will not return the drink, if the input does not match strDrink, defer to select autocomplete focus drink instead********
 
 	for(let key in data.drinks) {
 		if(data.drinks[key].strDrink.toLowerCase() === `${drink.toLowerCase()}`) {
 			console.log(data.drinks[key])
-			return data.drinks[key]
+			drinkArray.push(data.drinks[key])
+			document.querySelector('.popup-container').style.display = 'block';
+			document.querySelector('.popup-name').innerHTML = data.drinks[0].strDrink;
+			document.querySelector('.popup-image').src = data.drinks[0].strDrinkThumb
+			document.querySelector('.popup-image').style.width = '20rem'
+			document.querySelector('.popup-instructions').innerHTML = data.drinks[0].strInstructions;
+		} else {
+			// Make a autocomplete div that says 'no results named `${drink}` found
 		}
 	}
 
-	console.log(drinkArray)
+		console.log(drinkArray)
 
-      document.querySelector('h2').innerHTML = data.drinks[0].strDrink;
-      document.querySelector('img').src = data.drinks[0].strDrinkThumb
-	  document.querySelector('img').style.width = '20rem'
-      document.querySelector('h3').innerHTML = data.drinks[0].strInstructions;
     })
     .catch(err => {
         console.log(`error ${err}`)
     });
 }
+
+let ingredientName = [];
 
 // List cocktails
 function listCocktails() {
@@ -250,22 +259,35 @@ function listCocktails() {
     .then(res => res.json()) // parse response as JSON
     .then(data => {
 
+		console.log(data.drinks)
+
 		for(let key in data.drinks) {
 			if(data.drinks[key].strDrink.toLowerCase().startsWith(`${drink.toLowerCase()}`)) {
-			drinkName.push(data.drinks[key].strDrink)
+				drinkName.push(data.drinks[key].strDrink)
+			}
+		}
+
+		for(let i = 0; i < data.drinks.length; i++) {
+			if(Object.values(data.drinks[i]).map(x => {
+				if(x != null) {
+					return x.toLowerCase()
+				}
+			}).includes(`${drink.toLowerCase()}`)) {
+				ingredientName.push(data.drinks[i].strDrink)
 			}
 		}
 
 		drinkName = drinkName.filter(x => x.toLowerCase().startsWith(`${drink}`));
 
+		
+
 		if(drink == '') {
 			drinkName = [];
 		}
 
-		console.log([...new Set(drinkName)])
+		console.log([...new Set(drinkName.concat(ingredientName))])
 
-
-		// Add autocomplete here -.-
+		// Add autocomplete here -.- using drinkName array
 
     })
     .catch(err => {
@@ -274,27 +296,16 @@ function listCocktails() {
 }
 
 
-//Search by ingredient -> if 
-// www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin
-// www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka
+// Close popup when you click outside of it
+let popup = document.querySelector('.popup-container'); 
 
-
-// Popup drink window
-window.onload = function(){
-	var popup = document.getElementById('popup');
-    var overlay = document.getElementById('backgroundOverlay');
-    var openButton = document.getElementById('openOverlay');
-    document.onclick = function(e){
-        if(e.target.id !== 'popup'){
-            popup.style.display = 'none';
-            overlay.style.display = 'none';
-        }
-        if(e.target === openButton){
-         	popup.style.display = 'block';
-            overlay.style.display = 'block';
-        }
-    };
-};
+window.addEventListener('click', function(e){   
+	if (document.getElementById('clickbox').contains(e.target)){
+	  popup.style.display = 'block'
+	} else{
+	  popup.style.display = 'none'
+	}
+  });
 
 
 // Fetch Random Drink
