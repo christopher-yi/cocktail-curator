@@ -279,8 +279,6 @@ function listCocktails() {
 
 		drinkName = drinkName.filter(x => x.toLowerCase().startsWith(`${drink}`));
 
-		
-
 		if(drink == '') {
 			drinkName = [];
 		}
@@ -297,7 +295,7 @@ function listCocktails() {
 
 
 // Close popup when you click outside of it
-let popup = document.querySelector('.popup-container'); 
+const popup = document.querySelector('.popup-container'); 
 
 window.addEventListener('click', function(e){   
 	if (document.getElementById('clickbox').contains(e.target)){
@@ -373,8 +371,6 @@ function getRandom() {
 
 // Autocomplete
 
-// If the array contains the ingredient 'rum', 'whiskey, 'bourbon', vodka, tequila
-
 // Autocomplete feature https://www.w3schools.com/howto/howto_js_autocomplete.asp
 
 // ->>> While the search bar contains the characters the user puts in, create an alphabetically sorted array of the drinks that start with those characters and then create a list and make them appear on drop down list
@@ -387,3 +383,6 @@ function getRandom() {
 // need to also implement focus, and keyup, keydown on list
 
 // getCocktail will fire only when enter is pressed on text input or when submit button is pressed, get cocktail will change the popup container and add drink data onto it.
+
+
+// For featured recipes return drinks from a random ingredient list on page load
