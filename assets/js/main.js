@@ -385,4 +385,4 @@ function getRandom() {
 // getCocktail will fire only when enter is pressed on text input or when submit button is pressed, get cocktail will change the popup container and add drink data onto it.
 
 
-// For featured recipes return drinks from a random ingredient list on page load
+// For featured recipes return drinks from a random ingredient list on page load???
