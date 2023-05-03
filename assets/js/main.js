@@ -407,11 +407,6 @@ function getRandom() {
 	return ingredientsArr;
 }
 
-
-// Autocomplete feature https://www.w3schools.com/howto/howto_js_autocomplete.asp
-
-// For featured recipes return drinks from a random ingredient list on page load???
-
 // Autocomplete function
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -508,4 +503,179 @@ document.addEventListener("click", function (e) {
 });
 }
 
-autocomplete(document.getElementById("myInput"), drinkName);
+
+
+
+// Popup transition
+// Popup responsive to smaller screens
+
+// Featured 1
+// window.onload = function() {
+//     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+//     .then(res => res.json()) // parse response as JSON
+//     .then(data => {
+//       console.log(data.drinks);
+//       drinkName = []
+// 	  document.querySelector('.lucky').style.display = 'none'
+// 	  document.querySelector('.lucky2').style.display = 'none'
+	  
+// 	  document.querySelector(".list-container").innerHTML = '';
+	
+
+//       drinkArray = data.drinks
+
+// 	  for(let key in data.drinks[0]) {
+// 		if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
+// 			ingredientsArr.push(data.drinks[0][key])
+// 		}
+// 	  }
+
+// 	  for(let key in data.drinks[0]) {
+// 		if(key.includes('strMeasure') && data.drinks[0][key] !== null) {
+// 			measurementsArr.push(data.drinks[0][key])
+// 		}
+// 	  }
+
+// 	  for(let i = 0; i < measurementsArr.length; i++) {
+// 		for(let j = 0; j < ingredientsArr.length; j++) {
+// 			if(i == j) {
+// 				ingredientsArr[j] += ': ' + measurementsArr[i]
+// 			}
+// 		}
+// 	  }
+	  
+// 	  console.log(ingredientsArr)
+
+// 	  ingredientsArr.forEach(step => {
+// 		const instruct = `<li>${step}<li>`;
+// 		document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
+// 	  })
+
+// 	  document.querySelector('.list-container').style.display = 'inline-block'
+// 	  document.querySelector('.list-container').style.listStyle = 'none'
+//       document.querySelector('.random-name').innerHTML = data.drinks[0].strDrink;
+//       document.querySelector('.random-image').src = data.drinks[0].strDrinkThumb
+// 	  document.querySelector('.random-image').style.width = '20rem'
+//       document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
+
+// 	  ingredientsArr = [];
+//     })
+//     .catch(err => {
+//         console.log(`error ${err}`)
+//     });
+// 	return ingredientsArr;
+// }
+
+// // Featured 2
+// window.onload = function() {
+//     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+//     .then(res => res.json()) // parse response as JSON
+//     .then(data => {
+//       console.log(data.drinks);
+//       drinkName = []
+// 	  document.querySelector('.lucky').style.display = 'none'
+// 	  document.querySelector('.lucky2').style.display = 'none'
+	  
+// 	  document.querySelector(".list-container").innerHTML = '';
+	
+
+//       drinkArray = data.drinks
+
+// 	  for(let key in data.drinks[0]) {
+// 		if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
+// 			ingredientsArr.push(data.drinks[0][key])
+// 		}
+// 	  }
+
+// 	  for(let key in data.drinks[0]) {
+// 		if(key.includes('strMeasure') && data.drinks[0][key] !== null) {
+// 			measurementsArr.push(data.drinks[0][key])
+// 		}
+// 	  }
+
+// 	  for(let i = 0; i < measurementsArr.length; i++) {
+// 		for(let j = 0; j < ingredientsArr.length; j++) {
+// 			if(i == j) {
+// 				ingredientsArr[j] += ': ' + measurementsArr[i]
+// 			}
+// 		}
+// 	  }
+	  
+// 	  console.log(ingredientsArr)
+
+// 	  ingredientsArr.forEach(step => {
+// 		const instruct = `<li>${step}<li>`;
+// 		document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
+// 	  })
+
+// 	  document.querySelector('.list-container').style.display = 'inline-block'
+// 	  document.querySelector('.list-container').style.listStyle = 'none'
+//       document.querySelector('.random-name').innerHTML = data.drinks[0].strDrink;
+//       document.querySelector('.random-image').src = data.drinks[0].strDrinkThumb
+// 	  document.querySelector('.random-image').style.width = '20rem'
+//       document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
+
+// 	  ingredientsArr = [];
+//     })
+//     .catch(err => {
+//         console.log(`error ${err}`)
+//     });
+// 	return ingredientsArr;
+// }
+
+// // Featured 3
+// window.onload = function() {
+//     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+//     .then(res => res.json()) // parse response as JSON
+//     .then(data => {
+//       console.log(data.drinks);
+//       drinkName = []
+// 	  document.querySelector('.lucky').style.display = 'none'
+// 	  document.querySelector('.lucky2').style.display = 'none'
+	  
+// 	  document.querySelector(".list-container").innerHTML = '';
+	
+
+//       drinkArray = data.drinks
+
+// 	  for(let key in data.drinks[0]) {
+// 		if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
+// 			ingredientsArr.push(data.drinks[0][key])
+// 		}
+// 	  }
+
+// 	  for(let key in data.drinks[0]) {
+// 		if(key.includes('strMeasure') && data.drinks[0][key] !== null) {
+// 			measurementsArr.push(data.drinks[0][key])
+// 		}
+// 	  }
+
+// 	  for(let i = 0; i < measurementsArr.length; i++) {
+// 		for(let j = 0; j < ingredientsArr.length; j++) {
+// 			if(i == j) {
+// 				ingredientsArr[j] += ': ' + measurementsArr[i]
+// 			}
+// 		}
+// 	  }
+	  
+// 	  console.log(ingredientsArr)
+
+// 	  ingredientsArr.forEach(step => {
+// 		const instruct = `<li>${step}<li>`;
+// 		document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
+// 	  })
+
+// 	  document.querySelector('.list-container').style.display = 'inline-block'
+// 	  document.querySelector('.list-container').style.listStyle = 'none'
+//       document.querySelector('.random-name').innerHTML = data.drinks[0].strDrink;
+//       document.querySelector('.random-image').src = data.drinks[0].strDrinkThumb
+// 	  document.querySelector('.random-image').style.width = '20rem'
+//       document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
+
+// 	  ingredientsArr = [];
+//     })
+//     .catch(err => {
+//         console.log(`error ${err}`)
+//     });
+// 	return ingredientsArr;
+// }
