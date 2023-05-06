@@ -3258,7 +3258,7 @@ body {
 		}
 
 		.wrapper.style2 {
-			background-color: #5052b5;
+			background-color: #33334e;
 		}
 
 		.wrapper.style2-alt {
@@ -4015,17 +4015,61 @@ body {
 	z-index: 100;
   }
 
-  h2 {
+
+  h2:not(.lucky) {
 	margin: 0.5em 0 .9em 0;
 	text-align: center;
   }
 
-.actions {
+
+
+ 
+.a1 {
 	display: flex;
 	justify-content: center;
 }
 
-.actions > ul {
+.a1 > ul {
 	display: flex;
 }
+  
+@media screen and (max-width: 1280px){
+	h2 {
+		margin: 0.5em 0 .9em 0;
+		text-align: center;
+	  }
+	
+	 h1, .inner > p {
+		text-align: center;
+	} 
+	
+	 
+	.actions {
+		display: flex;
+		justify-content: center;
+	}
+	
+	.actions > ul {
+		display: flex;
+	}
+}
 
+.f1, .f2, .f3 {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.feature1-image, .feature2-image, .feature3-image {
+	display: block;
+  	width: 40%;
+  	height: auto;
+	display: flex;
+	margin: auto;
+}
+
+@media screen and (max-width: 980px) {
+	.feature1-image, .feature2-image, .feature3-image {
+		padding-top: 6%;
+	}
+}
