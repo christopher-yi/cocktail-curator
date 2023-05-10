@@ -3258,9 +3258,20 @@ body {
 		}
 
 		.wrapper.style2 {
-			background-color: #33334e;
+		
+			background-image: url(images/cocktail-background.jpg);
+			background-attachment: fixed;
+			background-position: top right;
+			background-repeat: no-repeat;
+			background-size: contain;
 		}
 
+		.f1 {
+			background-color: #261c3ec9;
+			
+		}
+
+		
 		.wrapper.style2-alt {
 			background-color: #3e4094;
 		}
@@ -3967,7 +3978,7 @@ body {
 	right: 0;
 	left: 25%;
 	max-height: 85vh;
-	background: #3a4569;
+	background: #1e212ef2;
 	z-index: 1;
   	width: 50%;
 }

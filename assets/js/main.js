@@ -231,11 +231,16 @@ function getCocktail() {
 			console.log(data.drinks[key])
 			drinkArray.push(data.drinks[key])
 
+			document.querySelector('.popup-container').classList.add(".fade-in-image");
 			document.querySelector('.popup-container').style.display = 'block';
+			document.querySelector('.popup-container').style.zIndex = 1;
+			document.querySelector('.popup-container').style.opacity = 1
+
 			document.querySelector('.popup-name').innerHTML = data.drinks[0].strDrink;
 			document.querySelector('.popup-image').src = data.drinks[0].strDrinkThumb
 			document.querySelector('.popup-image').style.width = '20rem'
 			document.querySelector('.popup-instructions').innerHTML = data.drinks[0].strInstructions;
+			
 
 			for(let key in data.drinks[0]) {
 				if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
@@ -728,11 +733,14 @@ document.querySelector('.feature3-button').addEventListener('click', feature3Rec
 // popup styling
 
 function xOut() {
+	document.querySelector('.popup-container').classList.remove(".fade-in-image");
+	document.querySelector('.popup-container').style.zIndex = -1
 	document.querySelector('.popup-container').style.display = 'none'
 	document.querySelector('.popup-container').style.opacity = 0
-
 }
 
 document.querySelector('.x-button').addEventListener('click', xOut)
 
 // fix x out reappearing T_____T
+
+// Fix x out by using true false variable???? if variable
