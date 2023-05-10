@@ -230,6 +230,7 @@ function getCocktail() {
 		if(data.drinks[key].strDrink.toLowerCase() === `${drink.toLowerCase()}`) {
 			console.log(data.drinks[key])
 			drinkArray.push(data.drinks[key])
+
 			document.querySelector('.popup-container').style.display = 'block';
 			document.querySelector('.popup-name').innerHTML = data.drinks[0].strDrink;
 			document.querySelector('.popup-image').src = data.drinks[0].strDrinkThumb
@@ -265,25 +266,39 @@ function getCocktail() {
 		
 			  document.querySelector('.popup-list').style.display = 'inline-block'
 			  document.querySelector('.popup-list').style.listStyle = 'none'
-		
+			  
 			  ingredientsArr = [];
-	  
-
+			  
+			  
+			}
 		}
-	}
-
+		
 		console.log(drinkArray)
-	ingredientsArr = [];
+		ingredientsArr = [];
     })
     .catch(err => {
-        console.log(`error ${err}`)
+		console.log(`error ${err}`)
     });
 	return ingredientsArr
 }
 
+
+// Close popup when you click outside of it
+const popup = document.querySelector('.popup-container'); 
+
+window.addEventListener('click', function(e){   
+	if (document.getElementById('clickbox').contains(e.target)){
+	  popup.style.display = 'block'
+	} else{
+	  popup.style.display = 'none'
+	}
+  });
+
+
+  
+  // List cocktails
 let ingredientName = [];
 
-// List cocktails
 function listCocktails() {
     let drink = document.querySelector('.drink-input').value;
     console.log(drink)
@@ -329,16 +344,6 @@ function listCocktails() {
 }
 
 
-// Close popup when you click outside of it
-const popup = document.querySelector('.popup-container'); 
-
-window.addEventListener('click', function(e){   
-	if (document.getElementById('clickbox').contains(e.target)){
-	  popup.style.display = 'block'
-	} else{
-	  popup.style.display = 'none'
-	}
-  });
 
 
 // Autocomplete function
@@ -493,6 +498,8 @@ function getRandom() {
 	  document.querySelector('.random-image').style.width = '20rem'
       document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
 
+	  fadeIn()
+
 	  ingredientsArr = [];
     })
     .catch(err => {
@@ -500,57 +507,70 @@ function getRandom() {
     });
 	return ingredientsArr;
 }
+
+// Fade In
+function fadeIn() {
+	document.querySelector('.fade-in').style.opacity = '1'
+	document.querySelector('.fade-in').style.transition = 'opacity 2s'
+}
+
+// Maybe mess around with current and new drink name or something to do fade out on current image and fade in on new one
 
 // Show features on page load
 window.addEventListener("load", feature1)
 window.addEventListener("load", feature2)
 window.addEventListener("load", feature3)
 
+
+
 // Featured 1
+let f1IngredientsArr = [];
+let f1MeasurementsArr = [];
+
+
 function feature1() {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
     .then(res => res.json()) // parse response as JSON
     .then(data => {
       console.log(data.drinks);
-      drinkName = []
 
       drinkArray = data.drinks
 
 	  for(let key in data.drinks[0]) {
 		if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
-			ingredientsArr.push(data.drinks[0][key])
+			f1IngredientsArr.push(data.drinks[0][key])
 		}
 	  }
 
 	  for(let key in data.drinks[0]) {
 		if(key.includes('strMeasure') && data.drinks[0][key] !== null) {
-			measurementsArr.push(data.drinks[0][key])
+			f1MeasurementsArr.push(data.drinks[0][key])
 		}
 	  }
 
-	  for(let i = 0; i < measurementsArr.length; i++) {
-		for(let j = 0; j < ingredientsArr.length; j++) {
+	  for(let i = 0; i < f1MeasurementsArr.length; i++) {
+		for(let j = 0; j < f1IngredientsArr.length; j++) {
 			if(i == j) {
-				ingredientsArr[j] += ': ' + measurementsArr[i]
+				f1IngredientsArr[j] += ': ' + f1MeasurementsArr[i]
 			}
 		}
 	  }
 	  
-	  console.log(ingredientsArr)
+	  console.log(f1IngredientsArr)
 
-	//   ingredientsArr.forEach(step => {
-	// 	const instruct = `<li>${step}<li>`;
-	// 	document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
-	//   })
+	  f1IngredientsArr.forEach(step => {
+		const instruct = `<li>${step}<li>`;
+		document.querySelector('.feature1-list').insertAdjacentHTML('beforeend', instruct);
+	  })
 
-	//   document.querySelector('.list-container').style.display = 'inline-block'
-	//   document.querySelector('.list-container').style.listStyle = 'none'
+
       document.querySelector('.feature1-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.feature1-image').src = data.drinks[0].strDrinkThumb
 	  document.querySelector('.feature1-image').style.minWidth = '20rem'
-    //   document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
+      document.querySelector('.feature1-instructions').innerHTML = data.drinks[0].strInstructions;
+	  
 
-	  ingredientsArr = [];
+	  f1IngredientsArr = [];
     })
     .catch(err => {
         console.log(`error ${err}`)
@@ -558,51 +578,65 @@ function feature1() {
 	return ingredientsArr;
 }
 
+// Feature 1 Popup
+function feature1Recipe() {
+	document.querySelector('.feature1-list').style.display = 'inline-block'
+	document.querySelector('.feature1-list').style.listStyle = 'none'
+	document.querySelector('.feature1-instructions').style.display = 'block'
+
+}
+
+document.querySelector('.feature1-button').addEventListener('click', feature1Recipe)
+
+
+
 // Featured 2
+let f2IngredientsArr = [];
+let f2MeasurementsArr = [];
+
+
 function feature2() {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
     .then(res => res.json()) // parse response as JSON
     .then(data => {
       console.log(data.drinks);
-      drinkName = []	
 
       drinkArray = data.drinks
 
 	  for(let key in data.drinks[0]) {
 		if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
-			ingredientsArr.push(data.drinks[0][key])
+			f2IngredientsArr.push(data.drinks[0][key])
 		}
 	  }
 
 	  for(let key in data.drinks[0]) {
 		if(key.includes('strMeasure') && data.drinks[0][key] !== null) {
-			measurementsArr.push(data.drinks[0][key])
+			f2MeasurementsArr.push(data.drinks[0][key])
 		}
 	  }
 
-	  for(let i = 0; i < measurementsArr.length; i++) {
-		for(let j = 0; j < ingredientsArr.length; j++) {
+	  for(let i = 0; i < f2MeasurementsArr.length; i++) {
+		for(let j = 0; j < f2IngredientsArr.length; j++) {
 			if(i == j) {
-				ingredientsArr[j] += ': ' + measurementsArr[i]
+				f2IngredientsArr[j] += ': ' + f2MeasurementsArr[i]
 			}
 		}
 	  }
 	  
-	  console.log(ingredientsArr)
+	  console.log(f2IngredientsArr)
 
-	//   ingredientsArr.forEach(step => {
-	// 	const instruct = `<li>${step}<li>`;
-	// 	document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
-	//   })
+	  f2IngredientsArr.forEach(step => {
+		const instruct = `<li>${step}<li>`;
+		document.querySelector('.feature2-list').insertAdjacentHTML('beforeend', instruct);
+	  })
 
-	//   document.querySelector('.list-container').style.display = 'inline-block'
-	//   document.querySelector('.list-container').style.listStyle = 'none'
+
       document.querySelector('.feature2-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.feature2-image').src = data.drinks[0].strDrinkThumb
 	  document.querySelector('.feature2-image').style.minWidth = '20rem'
-    //   document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
+      document.querySelector('.feature2-instructions').innerHTML = data.drinks[0].strInstructions;
 
-	  ingredientsArr = [];
+	  f2IngredientsArr = [];
     })
     .catch(err => {
         console.log(`error ${err}`)
@@ -610,51 +644,63 @@ function feature2() {
 	return ingredientsArr;
 }
 
+// Feature 2 Popup
+function feature2Recipe() {
+	document.querySelector('.feature2-list').style.display = 'inline-block'
+	document.querySelector('.feature2-list').style.listStyle = 'none'
+	document.querySelector('.feature2-instructions').style.display = 'block'
+
+}
+
+document.querySelector('.feature2-button').addEventListener('click', feature2Recipe)
+
 // Featured 3
+let f3IngredientsArr = [];
+let f3MeasurementsArr = [];
+
+
 function feature3() {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
     .then(res => res.json()) // parse response as JSON
     .then(data => {
       console.log(data.drinks);
-      drinkName = []	
 
       drinkArray = data.drinks
 
 	  for(let key in data.drinks[0]) {
 		if(key.includes('strIngredient') && data.drinks[0][key] !== null) {
-			ingredientsArr.push(data.drinks[0][key])
+			f3IngredientsArr.push(data.drinks[0][key])
 		}
 	  }
 
 	  for(let key in data.drinks[0]) {
 		if(key.includes('strMeasure') && data.drinks[0][key] !== null) {
-			measurementsArr.push(data.drinks[0][key])
+			f3MeasurementsArr.push(data.drinks[0][key])
 		}
 	  }
 
-	  for(let i = 0; i < measurementsArr.length; i++) {
-		for(let j = 0; j < ingredientsArr.length; j++) {
+	  for(let i = 0; i < f3MeasurementsArr.length; i++) {
+		for(let j = 0; j < f3IngredientsArr.length; j++) {
 			if(i == j) {
-				ingredientsArr[j] += ': ' + measurementsArr[i]
+				f3IngredientsArr[j] += ': ' + f3MeasurementsArr[i]
 			}
 		}
 	  }
 	  
-	  console.log(ingredientsArr)
+	  console.log(f3IngredientsArr)
 
-	//   ingredientsArr.forEach(step => {
-	// 	const instruct = `<li>${step}<li>`;
-	// 	document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
-	//   })
+	  f3IngredientsArr.forEach(step => {
+		const instruct = `<li>${step}<li>`;
+		document.querySelector('.feature3-list').insertAdjacentHTML('beforeend', instruct);
+	  })
 
-	//   document.querySelector('.list-container').style.display = 'inline-block'
-	//   document.querySelector('.list-container').style.listStyle = 'none'
+
       document.querySelector('.feature3-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.feature3-image').src = data.drinks[0].strDrinkThumb
 	  document.querySelector('.feature3-image').style.minWidth = '20rem'
-    //   document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
+      document.querySelector('.feature3-instructions').innerHTML = data.drinks[0].strInstructions;
 
-	  ingredientsArr = [];
+	  f3IngredientsArr = [];
     })
     .catch(err => {
         console.log(`error ${err}`)
@@ -662,5 +708,31 @@ function feature3() {
 	return ingredientsArr;
 }
 
+// Feature 3 Popup
+function feature3Recipe() {
+	document.querySelector('.feature3-list').style.display = 'inline-block'
+	document.querySelector('.feature3-list').style.listStyle = 'none'
+	document.querySelector('.feature3-instructions').style.display = 'block'
+
+}
+
+document.querySelector('.feature3-button').addEventListener('click', feature3Recipe)
+
 // Popup transition
 // Popup responsive to smaller screens
+
+// Featured popup -> Take inner html of each respective feature name, ingredients, arr, and instructions and make them the inner html of the popup elements
+
+// popup x out function
+
+// popup styling
+
+function xOut() {
+	document.querySelector('.popup-container').style.display = 'none'
+	document.querySelector('.popup-container').style.opacity = 0
+
+}
+
+document.querySelector('.x-button').addEventListener('click', xOut)
+
+// fix x out reappearing T_____T

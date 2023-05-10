@@ -3966,11 +3966,20 @@ body {
 	bottom: 0;
 	right: 0;
 	left: 25%;
-	height: 80vh;
-	background: #953d75;
+	max-height: 85vh;
+	background: #3a4569;
 	z-index: 1;
   	width: 50%;
 }
+
+.fade-in-image { 
+	animation: fadeIn .5s
+}
+
+@keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+  }
 
 /* When pop-up appears darken rest of site */
 /* body {
@@ -4073,3 +4082,23 @@ body {
 		padding-top: 6%;
 	}
 }
+
+.fade-in {
+	opacity: 0;
+}
+
+.x-button{
+	display: block;
+	transform: scale(1.5);
+	font-size: 20px;
+	position: relative;
+	top: 3%;
+	left: 95%;
+	color: white;
+	z-index: 100000;
+	height: 10px;
+	width: 10px;
+	cursor: pointer;
+  }
+
+  /* 80- 90 % width at small screen size */
