@@ -274,7 +274,12 @@ function getCocktail() {
 			  
 			  ingredientsArr = [];
 			  
-			  
+			  document.querySelector("#intro").style.filter = 'blur(20px)'
+			  document.querySelector("#one").style.filter = 'blur(20px)'
+			  document.querySelector("#two").style.filter = 'blur(20px)'
+			  document.querySelector("#three").style.filter = 'blur(20px)'
+			  document.querySelector("#footer").style.filter = 'blur(20px)'
+
 			}
 		}
 		
@@ -286,18 +291,6 @@ function getCocktail() {
     });
 	return ingredientsArr
 }
-
-
-// Close popup when you click outside of it
-const popup = document.querySelector('.popup-container'); 
-
-window.addEventListener('click', function(e){   
-	if (document.getElementById('clickbox').contains(e.target)){
-	  popup.style.display = 'block'
-	} else{
-	  popup.style.display = 'none'
-	}
-  });
 
 
   
@@ -733,14 +726,28 @@ document.querySelector('.feature3-button').addEventListener('click', feature3Rec
 // popup styling
 
 function xOut() {
-	document.querySelector('.popup-container').classList.remove(".fade-in-image");
-	document.querySelector('.popup-container').style.zIndex = -1
-	document.querySelector('.popup-container').style.display = 'none'
 	document.querySelector('.popup-container').style.opacity = 0
+	document.querySelector('.popup-container').classList.remove(".fade-in-image");
+	document.querySelector('.popup-container').style.zIndex = -1000
+	document.querySelector('.popup-container').style.display = 'none'
+	
+	document.querySelector("#intro").style.filter = ''
+	document.querySelector("#intro").style.transition = 'filter .3s'
+
+	document.querySelector("#one").style.filter = ''
+	document.querySelector("#one").style.transition = 'filter .3s'
+
+	document.querySelector("#two").style.filter = ''
+	document.querySelector("#two").style.transition = 'filter .3s'
+
+	document.querySelector("#three").style.filter = ''
+	document.querySelector("#three").style.transition = 'filter .3s'
+
+	document.querySelector("#footer").style.filter = ''
+	document.querySelector("#footer").style.transition = 'filter .3s'
+
 }
 
 document.querySelector('.x-button').addEventListener('click', xOut)
 
-// fix x out reappearing T_____T
-
-// Fix x out by using true false variable???? if variable
+// Finish styling popup layout and diff screen size layouts

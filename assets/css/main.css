@@ -3064,14 +3064,6 @@ body {
 				opacity: 1;
 			}
 
-		.spotlights > section:nth-child(2) {
-			background-color: rgba(0, 0, 0, 0.05);
-		}
-
-		.spotlights > section:nth-child(3) {
-			background-color: rgba(0, 0, 0, 0.1);
-		}
-
 		.spotlights > section.inactive > .image:before,
 		body.is-preload .spotlights > section > .image:before {
 			opacity: 1;
@@ -3254,11 +3246,10 @@ body {
         	right: 0px;
         	bottom: 0px;
       		left: 0px;
-			opacity: 75%;
+		
 		}
 
 		.wrapper.style2 {
-		
 			background-image: url(images/cocktail-background.jpg);
 			background-attachment: fixed;
 			background-position: top right;
@@ -3266,8 +3257,8 @@ body {
 			background-size: contain;
 		}
 
-		.f1 {
-			background-color: #261c3ec9;
+		.f1, .f2, .f3 {
+			background-color: #1c1a1fe0;
 			
 		}
 
@@ -3289,7 +3280,6 @@ body {
         	right: 0px;
         	bottom: 0px;
       		left: 0px;
-			opacity: 75%;
 		}
 
 		.wrapper.style3-alt {
@@ -3794,14 +3784,14 @@ body {
 			}
 
 			#sidebar nav a:before {
-				background: #3c2c62;
+				background: #622c2c;
 			}
 
 			#sidebar nav a:after {
-				background-image: -moz-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: -webkit-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: -ms-linear-gradient(to right, #5e42a6, #b74e91);
-				background-image: linear-gradient(to right, #5e42a6, #b74e91);
+				background-image: -moz-linear-gradient(to right, #a73434, #cbcbcd);
+				background-image: -webkit-linear-gradient(to right, #a73434, #cbcbcd);
+				background-image: -ms-linear-gradient(to right, #a73434, #cbcbcd);
+				background-image: linear-gradient(to right, #a73434, #cbcbcd);
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -3905,6 +3895,9 @@ body {
 
 /* Intro */
 
+	#intro {
+		position: inherit;
+	}
 	
 	.wrapper.style1::before {
 		content: "";
@@ -3918,7 +3911,7 @@ body {
         right: 0px;
         bottom: 0px;
       	left: 0px;
-		opacity: 75%;
+		z-index: -10000;
 	}
 
 	p {
@@ -3926,7 +3919,7 @@ body {
 	}
 
 	li {
-		color: rgb(192, 192, 192);
+		color: rgb(255, 255, 255);
 	}
 
 		#intro p {
@@ -3978,13 +3971,14 @@ body {
 	right: 0;
 	left: 25%;
 	max-height: 85vh;
-	background: #1e212ef2;
+	background-color: #1c1a1fef;
+
 	z-index: 1;
   	width: 50%;
 }
 
 .fade-in-image { 
-	animation: fadeIn .5s
+	animation: fadeIn .3s
 }
 
 @keyframes fadeIn {
