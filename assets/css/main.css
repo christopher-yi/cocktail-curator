@@ -2633,7 +2633,6 @@ body {
 	}
 
 		ul li {
-			padding-left: 0.5em;
 		}
 
 		ul.alt {
@@ -3081,7 +3080,7 @@ body {
 		@media screen and (max-width: 1680px) {
 
 			.spotlights > section > .content {
-				padding: 4em 4em 2em 4em ;
+				padding: 0 4em 2em 4em ;
 			}
 
 		}
@@ -3119,7 +3118,7 @@ body {
 			}
 
 			.spotlights > section > .content {
-				padding: 3em 2em 1em 2em ;
+				padding: 0em 2em 1em 2em ;
 			}
 
 		}
@@ -3923,44 +3922,10 @@ body {
 	}
 
 		#intro p {
-			font-size: 1.25em;
+			font-size: 1em;
 		}
 
-			@media screen and (max-width: 980px) {
-
-				#intro p br {
-					display: none;
-				}
-
-			}
-
-			@media screen and (max-width: 736px) {
-
-				#intro p {
-					font-size: 1em;
-				}
-
-			}
-
-		@media screen and (max-width: 1280px) {
-
-			#intro {
-				background-attachment: scroll;
-			}
-
-		}
-
-@media screen and (max-width: 1280px) {
-	.wrapper.style1::before, .wrapper.style1-alt::before, .wrapper.style3::before {
-		background-size: cover;
-	}
-}
-
-@media screen and (max-width: 736px) {
-	.wrapper.style1::before, .wrapper.style1-alt::before, .wrapper.style3::before  {
-		background-size: contain;
-	}
-}
+			
 
 /* Popup */
 
@@ -3971,12 +3936,27 @@ body {
 	right: 0;
 	left: 25%;
 	max-height: 85vh;
-	background-color: #1c1a1fef;
-
+	background-color: #1c1a1fe3;
 	z-index: 1;
-  	width: 50%;
+  	width: 70%;
 }
 
+.popup-image {
+	padding: 0 5% 0 15%;
+	width: 30%;
+	box-sizing: content-box;
+}
+
+.popup-list {
+
+}
+
+.popup-instructions {
+	padding: 1% 8% 0 8%;
+}
+
+
+/* Fade in popup animation */
 .fade-in-image { 
 	animation: fadeIn .3s
 }
@@ -3986,10 +3966,6 @@ body {
 	100% { opacity: 1; }
   }
 
-/* When pop-up appears darken rest of site */
-/* body {
-	-webkit-mask-image: linear-gradient(black, transparent);
-} */
 
 /* Autocomplete */
 .autocomplete {
@@ -4031,8 +4007,9 @@ body {
 
 
   h2:not(.lucky) {
-	margin: 0.5em 0 .9em 0;
+	margin: 1.5em 0 1em 0;
 	text-align: center;
+	font-weight: 400;
   }
 
 
@@ -4047,7 +4024,63 @@ body {
 	display: flex;
 }
   
+
+
+.f1, .f2, .f3 {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.feature1-image, .feature2-image, .feature3-image {
+	display: block;
+  	width: 40%;
+  	height: auto;
+	display: flex;
+	margin: auto;
+}
+
+
+.list-container {
+	margin-left: 3%;
+}
+
+.random-name {
+	margin-bottom: 3%;
+}
+
+.random-image {
+	width: 50%;
+}
+
+
+.fade-in {
+	opacity: 0;
+}
+
+
+.x-button{
+	display: block;
+	position: relative;
+	top: 2%;
+	left: 95%;
+	color: white;
+	z-index: 100000;
+	height: 10px;
+	width: 10px;
+	cursor: pointer;
+}
+
+/* Media queries */
 @media screen and (max-width: 1280px){
+	#intro {
+		background-attachment: scroll;
+	}
+
+	.wrapper.style1::before, .wrapper.style1-alt::before, .wrapper.style3::before {
+		background-size: cover;
+	}
+
 	h2 {
 		margin: 0.5em 0 .9em 0;
 		text-align: center;
@@ -4066,44 +4099,84 @@ body {
 	.actions > ul {
 		display: flex;
 	}
-}
 
-.f1, .f2, .f3 {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-}
-
-.feature1-image, .feature2-image, .feature3-image {
-	display: block;
-  	width: 40%;
-  	height: auto;
-	display: flex;
-	margin: auto;
-}
-
-@media screen and (max-width: 980px) {
-	.feature1-image, .feature2-image, .feature3-image {
-		padding-top: 6%;
+	.popup-container {
+		margin-top: 3%;
+		left: 15%;
 	}
 }
 
-.fade-in {
-	opacity: 0;
+@media screen and (max-width: 980px) {
+	#intro p br {
+		display: none;
+	}
+
+	.popup-container {
+		margin-top: 4%;
+	}
+
+	.feature1-image, .feature2-image, .feature3-image {
+		padding-top: 6%;
+		width: 60%;
+	}
+	
+	.feature1-list, .feature2-list, .feature3-list, .list-container {
+		width: 100%;
+		text-align: center;
+	}
+	
+	.list-container {
+		margin-left: 0%;
+	}
+		
+	.random-image {
+		display: block;
+		width: 70%;
+		margin: auto;
+		padding-bottom: 5%;
+	}
+}
+		
+@media screen and (max-width: 960px) {
+	
+	.popup-image {
+		width: 50%;
+		display: block;
+		margin: auto;
+		padding: 0 0 5% 0;
+	}
+	
+	.popup-list {
+		text-align: center;
+		width: 100%;
+	}
 }
 
-.x-button{
-	display: block;
-	transform: scale(1.5);
-	font-size: 20px;
-	position: relative;
-	top: 3%;
-	left: 95%;
-	color: white;
-	z-index: 100000;
-	height: 10px;
-	width: 10px;
-	cursor: pointer;
-  }
+@media screen and (max-width: 900px) {
+	.x-button {
+		left: 92%;
+	}
+}
 
-  /* 80- 90 % width at small screen size */
+@media screen and (max-width: 736px) {
+	.wrapper.style1::before, .wrapper.style1-alt::before, .wrapper.style3::before  {
+		background-size: contain;
+	}
+	
+	body, input, select, textarea {
+		font-size: 10pt;
+	}
+
+	.popup-container {
+		margin-top: 0;
+	}
+
+	h2:not(.lucky) {
+		margin: 2.5em 0 1em 0;
+	  }
+
+	.popup-instructions {
+		padding: 0 8% 0 8%;
+	}
+}
+

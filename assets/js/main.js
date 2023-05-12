@@ -238,7 +238,7 @@ function getCocktail() {
 
 			document.querySelector('.popup-name').innerHTML = data.drinks[0].strDrink;
 			document.querySelector('.popup-image').src = data.drinks[0].strDrinkThumb
-			document.querySelector('.popup-image').style.width = '20rem'
+			
 			document.querySelector('.popup-instructions').innerHTML = data.drinks[0].strInstructions;
 			
 
@@ -493,7 +493,7 @@ function getRandom() {
 	  document.querySelector('.list-container').style.listStyle = 'none'
       document.querySelector('.random-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.random-image').src = data.drinks[0].strDrinkThumb
-	  document.querySelector('.random-image').style.width = '20rem'
+	
       document.querySelector('.random-instructions').innerHTML = data.drinks[0].strInstructions;
 
 	  fadeIn()
@@ -564,7 +564,6 @@ function feature1() {
 
       document.querySelector('.feature1-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.feature1-image').src = data.drinks[0].strDrinkThumb
-	  document.querySelector('.feature1-image').style.minWidth = '20rem'
       document.querySelector('.feature1-instructions').innerHTML = data.drinks[0].strInstructions;
 	  
 
@@ -631,7 +630,6 @@ function feature2() {
 
       document.querySelector('.feature2-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.feature2-image').src = data.drinks[0].strDrinkThumb
-	  document.querySelector('.feature2-image').style.minWidth = '20rem'
       document.querySelector('.feature2-instructions').innerHTML = data.drinks[0].strInstructions;
 
 	  f2IngredientsArr = [];
@@ -695,7 +693,6 @@ function feature3() {
 
       document.querySelector('.feature3-name').innerHTML = data.drinks[0].strDrink;
       document.querySelector('.feature3-image').src = data.drinks[0].strDrinkThumb
-	  document.querySelector('.feature3-image').style.minWidth = '20rem'
       document.querySelector('.feature3-instructions').innerHTML = data.drinks[0].strInstructions;
 
 	  f3IngredientsArr = [];
@@ -716,14 +713,6 @@ function feature3Recipe() {
 
 document.querySelector('.feature3-button').addEventListener('click', feature3Recipe)
 
-// Popup transition
-// Popup responsive to smaller screens
-
-// Featured popup -> Take inner html of each respective feature name, ingredients, arr, and instructions and make them the inner html of the popup elements
-
-// popup x out function
-
-// popup styling
 
 function xOut() {
 	document.querySelector('.popup-container').style.opacity = 0
