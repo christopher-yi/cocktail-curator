@@ -3947,10 +3947,6 @@ body {
 	box-sizing: content-box;
 }
 
-.popup-list {
-
-}
-
 .popup-instructions {
 	padding: 1% 8% 0 8%;
 }
@@ -4050,7 +4046,7 @@ body {
 }
 
 .random-image {
-	width: 50%;
+	width: 40%;
 }
 
 

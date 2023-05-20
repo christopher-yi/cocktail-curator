@@ -487,6 +487,9 @@ function getRandom() {
 	  ingredientsArr.forEach(step => {
 		const instruct = `<li>${step}<li>`;
 		document.querySelector('.list-container').insertAdjacentHTML('beforeend', instruct);
+		document.querySelector('.list-container').style.zIndex = 1000
+
+
 	  })
 
 	  document.querySelector('.list-container').style.display = 'inline-block'
